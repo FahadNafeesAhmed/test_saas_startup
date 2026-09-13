@@ -55,7 +55,7 @@ const signInSchema = z.object({
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { email, password, altcha } = data;
 
-  const isVerified = await verifySolution(altcha, hmacKey);
+  const isVerified = await verifySolution(altcha as string, hmacKey);
   if (!isVerified) {
     return {
       error: 'Anti-bot challenge failed. Please try again.',

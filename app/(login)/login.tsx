@@ -11,6 +11,16 @@ import { signIn, signUp } from './actions';
 import { ActionState } from '@/lib/auth/middleware';
 import 'altcha';
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'altcha-widget': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        challengeurl?: string;
+      };
+    }
+  }
+}
+
 export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect');
@@ -88,6 +98,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
 
           {mode === 'signin' && (
             <div className="mt-4">
+              {/* @ts-ignore - Web component not in JSX types */}
               <altcha-widget challengeurl="/api/altcha"></altcha-widget>
             </div>
           )}

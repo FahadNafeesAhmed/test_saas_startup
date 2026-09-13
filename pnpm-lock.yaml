@@ -24,8 +24,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
       altcha-lib:
-        specifier: ^2.5.0
-        version: 2.5.0
+        specifier: ^1.4.0
+        version: 1.4.1
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.3)
@@ -1422,53 +1422,8 @@ packages:
   '@types/react@19.1.4':
     resolution: {integrity: sha512-EB1yiiYdvySuIITtD5lhW4yPyJ31RkJkkDw794LaQYrxCSaQV/47y5o1FMC4zF9ZyjUjzJMZwbovEnT5yHTW6g==}
 
-  altcha-lib@2.5.0:
-    resolution: {integrity: sha512-MiqlwnImoooVTmFzZ8odhpqtCsSl7M/6cmgaX42Tkuvd41e5IVveg6hiw/e9rXSb6dm1RvniPmeURwO64wWTuQ==}
-    hasBin: true
-    peerDependencies:
-      '@fastify/cookie': ^11.0.0
-      '@fastify/cors': ^11.0.0
-      '@fastify/formbody': ^8.0.0 || ^9.0.0
-      '@nestjs/common': ^10.0.0 || ^11.0.0 || ^12.0.0
-      '@nestjs/core': ^10.0.0 || ^11.0.0 || ^12.0.0
-      '@nestjs/platform-express': ^10.0.0 || ^11.0.0 || ^12.0.0
-      '@nestjs/platform-fastify': ^10.0.0 || ^11.0.0 || ^12.0.0
-      '@sveltejs/kit': ^2.0.0
-      cookie-parser: ^1.0.0
-      cors: ^2.0.0
-      express: ^4.0.0 || ^5.0.0
-      fastify: ^5.0.0
-      h3: ^2.0.0
-      hono: ^4.0.0
-    peerDependenciesMeta:
-      '@fastify/cookie':
-        optional: true
-      '@fastify/cors':
-        optional: true
-      '@fastify/formbody':
-        optional: true
-      '@nestjs/common':
-        optional: true
-      '@nestjs/core':
-        optional: true
-      '@nestjs/platform-express':
-        optional: true
-      '@nestjs/platform-fastify':
-        optional: true
-      '@sveltejs/kit':
-        optional: true
-      cookie-parser:
-        optional: true
-      cors:
-        optional: true
-      express:
-        optional: true
-      fastify:
-        optional: true
-      h3:
-        optional: true
-      hono:
-        optional: true
+  altcha-lib@1.4.1:
+    resolution: {integrity: sha512-MAXP9tkQOA2SE9Gwoe3LAcZbcDpp3XzYc5GDVej/y3eMNaFG/eVnRY1/7SGFW0RPsViEjPf+hi5eANjuZrH1xA==}
 
   altcha@3.2.2:
     resolution: {integrity: sha512-yNITQaRSkRe0u/hMxdzoXFFqxqn9iDt1rJ0reREU3D3uDD3w1oFz6v5C2PMww2XnGThtYUwe8MW+PxsiBglNqw==}
@@ -3262,7 +3217,7 @@ snapshots:
     dependencies:
       csstype: 3.1.3
 
-  altcha-lib@2.5.0: {}
+  altcha-lib@1.4.1: {}
 
   altcha@3.2.2:
     dependencies:
