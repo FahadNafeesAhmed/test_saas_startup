@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 import Link from 'next/link';
-import { useHeaders } from '@/lib/hooks/use-headers'; // We'll create this to read context, or use standard props. Wait, it's a client component, reading headers is hard. We can pass the country as a prop from a server component wrapper or just read the cookie. The middleware can set a cookie.
-
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
