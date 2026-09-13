@@ -2,11 +2,10 @@
 
 ## Run Commands
 ```bash
-docker compose up -d
 pnpm install
-pnpm db:migrate
-pnpm db:seed
 pnpm dev
+# No database and no environment variables: users, teams and activity live in memory (lib/db/store.ts).
+# Deploys to Vercel as-is.
 ```
 
 ## Test User

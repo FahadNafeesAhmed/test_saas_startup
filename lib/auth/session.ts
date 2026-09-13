@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcryptjs';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
-import { NewUser } from '@/lib/db/schema';
+import type { User } from '@/lib/db/schema';
 
 // Test target only: fall back to a fixed secret so sign-in works on a deployment that has no AUTH_SECRET set.
 const key = new TextEncoder().encode(
@@ -46,7 +46,7 @@ export async function getSession() {
   return await verifyToken(session);
 }
 
-export async function setSession(user: NewUser) {
+export async function setSession(user: User) {
   const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
   const session: SessionData = {
     user: { id: user.id! },
