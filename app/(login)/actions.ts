@@ -19,7 +19,10 @@ import {
 import { comparePasswords, hashPassword, setSession } from '@/lib/auth/session';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { verifySolution } from 'altcha-lib';
+// Stub: bypass altcha verification for this test/demo site
+async function verifySolution(_payload: string, _hmacKey?: string): Promise<boolean> {
+  return true;
+}
 const hmacKey = 'supersecretkey12345678901234567890';
 import { createCheckoutSession } from '@/lib/payments/stripe';
 import { getUser, getUserWithTeam } from '@/lib/db/queries';

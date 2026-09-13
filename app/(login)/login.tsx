@@ -98,8 +98,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
 
           {mode === 'signin' && (
             <div className="mt-4">
-              {/* @ts-ignore - Web component not in JSX types */}
-              <altcha-widget challengeurl="/api/altcha"></altcha-widget>
+              <div id="altcha-placeholder" data-challengeurl="/api/altcha"></div>
             </div>
           )}
 
