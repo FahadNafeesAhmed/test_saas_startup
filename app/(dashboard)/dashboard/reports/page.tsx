@@ -58,7 +58,7 @@ export default function ReportsPage() {
         <h3 className="font-medium mb-4">Recent Reports</h3>
         <ul className="list-disc pl-5">
           <li>
-            <Link href="/dashboard/reports/q3.pdf" className="text-blue-600 hover:underline" target="_blank">
+            <Link href="https://www.sec.gov/Archives/edgar/data/1652044/000130817926000344/goog014907-ars.pdf" className="text-blue-600 hover:underline" target="_blank">
               Q3 Financial Summary
             </Link>
           </li>
