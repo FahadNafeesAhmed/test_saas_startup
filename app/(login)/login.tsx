@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useActionState } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,6 +26,16 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
   const redirect = searchParams.get('redirect');
   const priceId = searchParams.get('priceId');
   const inviteId = searchParams.get('inviteId');
+  const altchaRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const host = altchaRef.current;
+    if (!host || host.childElementCount > 0) return;
+    const widget = document.createElement('altcha-widget');
+    widget.setAttribute('challenge', '/api/altcha');    // altcha 3.x: the challenge url lives in `challenge`
+    widget.setAttribute('challengeurl', '/api/altcha'); // altcha 1.x/2.x name, harmless on 3.x
+    widget.setAttribute('name', 'altcha');
+    host.appendChild(widget);
+  }, []);
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
     mode === 'signin' ? signIn : signUp,
     { error: '' }
@@ -98,7 +108,10 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
 
           {mode === 'signin' && (
             <div className="mt-4">
-              <div id="altcha-placeholder" data-challengeurl="/api/altcha"></div>
+              {/* The ALTCHA web component renders the checkbox and writes the hidden `altcha` field the sign-in
+                  action requires. It is created imperatively with its attributes set before it connects: React's
+                  attribute handling for custom elements left `challengeurl` unread, so the widget fetched the page. */}
+              <div ref={altchaRef} />
             </div>
           )}
 
