@@ -1,8 +1,26 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Manrope } from 'next/font/google';
-import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
+
+// Safe wrappers that return null if the DB is unavailable (e.g. during Vercel build)
+async function safeGetUser() {
+  try {
+    const { getUser } = await import('@/lib/db/queries');
+    return await getUser();
+  } catch {
+    return null;
+  }
+}
+
+async function safeGetTeam() {
+  try {
+    const { getTeamForUser } = await import('@/lib/db/queries');
+    return await getTeamForUser();
+  } catch {
+    return null;
+  }
+}
 
 export const metadata: Metadata = {
   title: 'Next.js SaaS Starter',
@@ -31,8 +49,8 @@ export default function RootLayout({
             fallback: {
               // We do NOT await here
               // Only components that read this data will suspend
-              '/api/user': getUser(),
-              '/api/team': getTeamForUser()
+              '/api/user': safeGetUser(),
+              '/api/team': safeGetTeam()
             }
           }}
         >
@@ -42,3 +60,4 @@ export default function RootLayout({
     </html>
   );
 }
+
