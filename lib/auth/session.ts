@@ -3,7 +3,10 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { NewUser } from '@/lib/db/schema';
 
-const key = new TextEncoder().encode(process.env.AUTH_SECRET);
+// Test target only: fall back to a fixed secret so sign-in works on a deployment that has no AUTH_SECRET set.
+const key = new TextEncoder().encode(
+  process.env.AUTH_SECRET || 'helix-ledger-test-target-secret-not-for-production-0123456789'
+);
 const SALT_ROUNDS = 10;
 
 export async function hashPassword(password: string) {

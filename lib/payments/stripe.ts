@@ -7,8 +7,25 @@ import {
   updateTeamSubscription
 } from '@/lib/db/queries';
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-04-30.basil'
+// Lazy client: `next build` collects page data for the Stripe routes on Vercel, where STRIPE_SECRET_KEY may be
+// unset. Constructing Stripe eagerly there throws "Neither apiKey nor config.authenticator provided" and fails
+// the build. The client is created on first use instead; a placeholder key keeps this test target buildable.
+let _stripe: Stripe | null = null;
+function getStripe(): Stripe {
+  if (!_stripe) {
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
+      apiVersion: '2025-04-30.basil'
+    });
+  }
+  return _stripe;
+}
+
+export const stripe: Stripe = new Proxy({} as Stripe, {
+  get(_target, prop, receiver) {
+    const real = getStripe();
+    const value = Reflect.get(real, prop, receiver);
+    return typeof value === 'function' ? value.bind(real) : value;
+  }
 });
 
 export async function createCheckoutSession({
